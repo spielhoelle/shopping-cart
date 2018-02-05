@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Shopping Cart</title>
+
+    <meta charset="ISO-8859-1">
+    <link rel="stylesheet" href="assets/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/stylesheets/style.css">
+    <link rel="stylesheet" href="assets/stylesheets/font-awesome.min.css">
+  </head>
+
+  <body class="h-100">
+    <main role="main" class="d-flex flex-column h-100">
+    <header class="header clearfix">
+      <nav class="navbar navbar-expand navbar-light bg-light justify-content-between">
+        <a class="navbar-brand" href="#">Kauf dich glücklich!</a>
+        <div class="ml-auto total-target mr-2 faded faders"> </div>
+        <div class="" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <h3 class="mx-3">Your Cart</h3>
+                <ul class="cartresult list-group-flush list-group"> </ul>
+                <div class="dropdown-divider"></div>
+                <div class="total-target mx-3"> </div>
+
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container my-5">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Our Products</h2>
+          <div id="products" class="mb-5 row"></div>
+        </div>
+        <div id="cart" class="col-md-12 faders faded">
+          <div class="card">
+            <div class="card-header">
+              <h3>Cart</h3>
+            </div>
+            <div class="">
+              <ul class="list-group mb-3 list-group-flush cartresult"> </ul>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-outline-danger float-right" id="reset" rel="button">Empty Cart</button>
+              <div class="total-target faded"> </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    </main>
+
+
+
+
+
+    <!-- total-template-->
+    <span id="total-template" class="ml-auto d-none summary"><small>Total: <b class="total"></b> &euro; | Shipping: <b class="shipping"></b> &euro; | Delivery: <b class="delivery"></b> days</small></span>
+
+    <!-- for product listemplate-->
+    <div class="col-md-3 col-sm-6 d-none mb-3 faded faders" id="template">
+      <div class="card">
+        <img class="card-img-top" src="" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title mb-0">
+          </h5>
+          <p class="card-text"></p>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary cart-button float-right btn-sm">
+            <i class="fa fa-cart-plus pointer-events-none"></i> 
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+    <script src="assets/javascript/popper.min.js"></script>
+    <script src="assets/javascript/bootstrap.min.js"></script>
+
+    <script src="assets/javascript/database.js"></script>
+    <script src="assets/javascript/index.js"></script>
+  </body>
+</html>
