@@ -6,7 +6,6 @@ class shoppingCart {
     this.db.time = this.db.time || 0;
     this.elements = {
       list: document.getElementById('products'),
-      items: document.querySelectorAll('#products li'),
       result: document.querySelectorAll('.cartresult'),
       reset: document.getElementById('reset'),
       cart: document.getElementById('cart'),
@@ -77,10 +76,6 @@ class shoppingCart {
         return i
       }
     }
-  }
-  removeFromCart(item){
-
-    let itemKey = this.findItemKey(item)
   }
   updateCart(item, remove = false){
     let itemKey = this.findItemKey(item)
