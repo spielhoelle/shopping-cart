@@ -89,7 +89,7 @@ class shoppingCart {
       if(this.db.items[itemKey].count > 1){
         this.db.items[itemKey].count--
       }else{
-        this.db.items.shift(itemKey)
+        this.db.items.splice(itemKey, 1)
       }
     } else {
       //this.db.total += Number( event.target.dataset.price )
