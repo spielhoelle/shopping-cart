@@ -1,0 +1,30 @@
+@import "bootstrap.min"
+
+$bg-blue: #220000
+
+h1
+  color: $bg-blue
+
+.flex-grow
+  flex-grow: 1
+
+.pointer-events-none
+  pointer-events: none
+
+#products > .card, #result > li, .summary b
+  animation: fadein 0.5s
+  transition: opacity .5s ease
+  opacity: 1
+
+.faders
+  transition: opacity .5s ease
+
+.faded
+  opacity: 0
+
+@keyframes fadein
+  from
+    opacity: 0
+
+  to
+    opacity: 1
