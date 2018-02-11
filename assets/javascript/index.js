@@ -19,9 +19,32 @@ class CartData  {
   init() {
     console.log(this.db)
   }
+
+  addItem() {
+
+    this.updateCart()
+  }
+
+  removeItem() {
+
+    this.updateCart()
+  }
+
+  updateCart() {
+    this.updateDelivery();
+    this.updateShipping();
+  }
+
+  updateShipping() {
+
+  }
+
+  updateDelivery() {
+
+  }
 }
 
-shoppingCartData = new CartData({delivery:12})
+shoppingCartData = new CartData()
 
 class shoppingCart {
   constructor () {
