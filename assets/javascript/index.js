@@ -25,7 +25,7 @@ class shoppingCart {
       element.querySelector('.card-img-top').src = database[i].image
       element.querySelector('.card-title').prepend(i)
       //element.querySelector('.card-text').innerHTML = `${ database[i].content } `
-      
+
       var footer = document.createElement('small');
       footer.classList.add('text-muted');
       footer.innerHTML = `shipping: ${database[i].shipping}&euro; <br> delivery: ${database[i].delivery}d`;
@@ -48,6 +48,7 @@ class shoppingCart {
       }
     }
     document.addEventListener('click', (e)=>{
+      console.log(e);
       if(e.target && e.target.classList.contains( 'btn-danger' )){//do something}
         let itemKey = this.findItemKey(e.target.dataset.name)
         this.updateCart(e.target.dataset.name, true)
@@ -77,8 +78,8 @@ class shoppingCart {
       }
     }
   }
-  updateCart(item, remove = false){
-    let itemKey = this.findItemKey(item)
+  updateCart(itemName, remove = false){
+    let itemKey = this.findItemKey(itemName)
     if(remove){
       //this.db.total -= Number( this.db.items[itemKey].price )
       if(this.db.items[itemKey].count > 1){
@@ -95,9 +96,16 @@ class shoppingCart {
       }
     }
     if(this.db.items.length > 0) {
+
+      //////////
+      // here //
+      //////////
+
       this.db.total = this.db.items.map((i) => {
         return i.price * i.count
-      }).reduce((e, i) => Number(e) + Number(i))
+      });
+      console.log(this.db.total);
+      this.db.total = this.db.total.reduce((e, i) => Number(e) + Number(i))
 
       this.db.shipping = this.db.items.map((i) => {
         return i.shipping
