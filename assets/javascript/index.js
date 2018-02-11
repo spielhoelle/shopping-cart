@@ -1,3 +1,28 @@
+class CartData  {
+  constructor (cart) {
+    const defaultDB = {
+      total: 0,
+      shipping: 0,
+      delivery: 0,
+      items: []
+    }
+
+    this.db = Object.assign(
+      defaultDB,
+      JSON.parse( localStorage.getItem('cart') ),
+      cart
+    )
+
+    this.init();
+  }
+
+  init() {
+    console.log(this.db)
+  }
+}
+
+shoppingCartData = new CartData({delivery:12})
+
 class shoppingCart {
   constructor () {
     this.db = JSON.parse( localStorage.getItem('cart') ) || [];
@@ -109,60 +134,60 @@ class shoppingCart {
 
       this.db.shipping = this.db.items.map((i) => {
         return i.shipping
-      })
-      this.db.shipping = Math.max(...this.db.shipping)
-
-      this.db.delivery = this.db.items.map((i) => {
-        return i.delivery
-      })
-      this.db.delivery = Math.max(...this.db.delivery)
-    } else {
-      this.db.shipping = 0;
-      this.db.total = 0;
-      this.db.delivery = 0;
-    }
-
-    localStorage.setItem("cart", JSON.stringify( {shipping: this.db.shipping, total: this.db.total, items: this.db.items, delivery: this.db.delivery } ))
-    this.render()
-  }
-  render(){
-    this.db.items = this.db.items || []
-    if( this.db.items.length > 0 ){
-      this.elements.cart.classList.remove('faded')
-      for (let i = 0; i < this.elements.totaltarget.length; i++){
-        this.elements.totaltarget[i].classList.remove('faded')
-      }
-    } else {
-      this.elements.cart.classList.add('faded')
-      for (let i = 0; i < this.elements.totaltarget.length; i++){
-        this.elements.totaltarget[i].classList.add('faded')
-      }
-    }
-    var cart = document.createElement('div')
-    this.db.items.forEach( item => {
-      var element = document.createElement('li');
-      element.classList += 'list-group-item d-flex justify-content-between align-items-center ';
-      element.innerHTML = `<span class="badge badge-info badge-pill mr-2">${item.count} </span>  ${ item.name } - ${item.price}&euro; <span class="ml-auto mr-3 font-weight-bold">${( item.price * item.count ).toFixed(2)}&euro;</span>`;
-      var button = document.createElement('button');
-      button.classList.add('btn', 'btn-sm', 'btn-danger');
-      button.dataset.name = item.name
-      button.innerHTML = "<i class='fa fa-close pointer-events-none'></i>";
-      element.appendChild(button);
-      cart.appendChild(element);
     })
-    var ttemplate = this.elements.total_template
+    this.db.shipping = Math.max(...this.db.shipping)
+
+    this.db.delivery = this.db.items.map((i) => {
+      return i.delivery
+    })
+    this.db.delivery = Math.max(...this.db.delivery)
+  } else {
+    this.db.shipping = 0;
+    this.db.total = 0;
+    this.db.delivery = 0;
+  }
+
+  localStorage.setItem("cart", JSON.stringify( {shipping: this.db.shipping, total: this.db.total, items: this.db.items, delivery: this.db.delivery } ))
+  this.render()
+}
+render(){
+  this.db.items = this.db.items || []
+  if( this.db.items.length > 0 ){
+    this.elements.cart.classList.remove('faded')
     for (let i = 0; i < this.elements.totaltarget.length; i++){
-      ttemplate = ttemplate.cloneNode(true);
-      ttemplate.removeAttribute("id");
-      ttemplate.classList.remove("d-none")
-      ttemplate.querySelector(".total").innerHTML = this.db.total ? this.db.total.toFixed(2) : 0
-      ttemplate.querySelector(".delivery").innerHTML = this.db.delivery ? this.db.delivery.toFixed(0) : 0
-      ttemplate.querySelector(".shipping").innerHTML = this.db.shipping ? this.db.shipping.toFixed(0) : 0
-      this.elements.totaltarget[i].innerHTML = ttemplate.innerHTML
+      this.elements.totaltarget[i].classList.remove('faded')
     }
-    for (let i = 0; i < this.elements.result.length; i++){
-      this.elements.result[i].innerHTML = cart.innerHTML
+  } else {
+    this.elements.cart.classList.add('faded')
+    for (let i = 0; i < this.elements.totaltarget.length; i++){
+      this.elements.totaltarget[i].classList.add('faded')
     }
   }
+  var cart = document.createElement('div')
+  this.db.items.forEach( item => {
+    var element = document.createElement('li');
+    element.classList += 'list-group-item d-flex justify-content-between align-items-center ';
+    element.innerHTML = `<span class="badge badge-info badge-pill mr-2">${item.count} </span>  ${ item.name } - ${item.price}&euro; <span class="ml-auto mr-3 font-weight-bold">${( item.price * item.count ).toFixed(2)}&euro;</span>`;
+    var button = document.createElement('button');
+    button.classList.add('btn', 'btn-sm', 'btn-danger');
+    button.dataset.name = item.name
+    button.innerHTML = "<i class='fa fa-close pointer-events-none'></i>";
+    element.appendChild(button);
+    cart.appendChild(element);
+  })
+  var ttemplate = this.elements.total_template
+  for (let i = 0; i < this.elements.totaltarget.length; i++){
+    ttemplate = ttemplate.cloneNode(true);
+    ttemplate.removeAttribute("id");
+    ttemplate.classList.remove("d-none")
+    ttemplate.querySelector(".total").innerHTML = this.db.total ? this.db.total.toFixed(2) : 0
+    ttemplate.querySelector(".delivery").innerHTML = this.db.delivery ? this.db.delivery.toFixed(0) : 0
+    ttemplate.querySelector(".shipping").innerHTML = this.db.shipping ? this.db.shipping.toFixed(0) : 0
+    this.elements.totaltarget[i].innerHTML = ttemplate.innerHTML
+  }
+  for (let i = 0; i < this.elements.result.length; i++){
+    this.elements.result[i].innerHTML = cart.innerHTML
+  }
+}
 }
 var instaceOfCart = new shoppingCart();
