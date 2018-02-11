@@ -18,9 +18,7 @@ class CartData  {
   }
 
   init() {
-    console.log('Init: ', this.db);
     this.updateCart();
-    console.log('Updated: ', this.db);
   }
 
   addItem(itemObj) {
@@ -51,7 +49,3 @@ class CartData  {
     window.localStorage.setItem(this.localStorageKey, JSON.stringify(this.db));
   }
 }
-
-shoppingCartData = new CartData({delivery: 15})
-shoppingCartData.addItem({name: "Pants", shipping: "4.99", delivery: "5", price: "19.99"})
-console.log(shoppingCartData.db)
