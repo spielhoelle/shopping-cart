@@ -50,9 +50,9 @@ class shoppingCart {
     document.addEventListener('click', (e)=>{
       if(e.target && e.target.classList.contains( 'btn-danger' )){//do something}
         let itemKey = this.findItemKey(e.target.dataset.name)
-        this.updateCart(e.target.dataset.name, true)
+        this.updateCart(e, true)
       } else if (e.target && e.target.classList.contains( 'cart-button' )){
-        this.updateCart(e.target.dataset.name)
+        this.updateCart(e)
         this.render()
       }
     })
@@ -77,8 +77,8 @@ class shoppingCart {
       }
     }
   }
-  updateCart(item, remove = false){
-    let itemKey = this.findItemKey(item)
+  updateCart(event, remove = false){
+    let itemKey = this.findItemKey(event.target.dataset.name)
     if(remove){
       //this.db.total -= Number( this.db.items[itemKey].price )
       if(this.db.items[itemKey].count > 1){
@@ -91,6 +91,7 @@ class shoppingCart {
       if(itemKey !== undefined){
         this.db.items[itemKey].count++
       } else {
+        console.log('#####', event);
         this.db.items.push({shipping: event.target.dataset.shipping, name: event.target.dataset.name, price: event.target.dataset.price, delivery: event.target.dataset.delivery, count: 1})
       }
     }
